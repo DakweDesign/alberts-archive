@@ -512,19 +512,32 @@ html.test-flow .stack__space { display: none; }
 .card::after { content: ''; position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.16); pointer-events: none; z-index: 4; }
 
 /* ---------------------------------------------------------------------
-   PHONES: scroll-driven animations run on the browser's own scroll engine
-   (JavaScript scroll handlers lag the compositor on iOS and judder). Same
-   motion as the JS version: card arrives from below, tilted and scaled.
+   PHONES: no position:sticky (it shimmers on iOS Safari). Each card is
+   position:fixed and the invisible spacer item drives a scroll-linked
+   animation: the card rides in from below, tilted, and locks to the top.
+   Later cards stack over earlier ones in DOM order — same look as desktop.
    --------------------------------------------------------------------- */
 @supports (animation-timeline: view()) {
   @media (pointer: coarse) {
-    html.css-scroll .stack__item { --rot: -30deg; }
+    html.css-scroll .stack__item { --rot: -30deg; position: static; view-timeline-name: --item; }
     html.css-scroll .stack__item[data-rotate="30"] { --rot: 30deg; }
+    html.css-scroll .works { view-timeline-name: --works; }
     html.css-scroll .card {
-      animation: card-in linear backwards; animation-timeline: view(); animation-range: entry 0% entry 100%;   /* backwards: nothing left on the element once landed */
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 5;
+      animation: card-ride linear backwards, card-leave linear forwards;
+      animation-timeline: --item, --works;
+      animation-range: entry 0% entry 100%, exit 0% exit 100%;
     }
     html.css-scroll .hero { animation: hero-fade linear both; animation-timeline: scroll(root); animation-range: 0 calc(var(--vh, 1vh) * 100); }
   }
+}
+@keyframes card-ride {
+  from { visibility: hidden; transform: perspective(100vw) translate3d(0, calc(var(--vh, 1vh) * 200), 0) rotate(var(--rot, 0deg)) scale(.75); }
+  to   { visibility: visible; transform: none; }
+}
+@keyframes card-leave {
+  from { translate: 0 0; }
+  to   { translate: 0 calc(var(--vh, 1vh) * -100); visibility: hidden; }
 }
 @keyframes card-in {
   from { transform: perspective(100vw) translate3d(0, calc(var(--vh, 1vh) * 100), 0) rotate(var(--rot, 0deg)) scale(.75); }
@@ -533,3 +546,7 @@ html.test-flow .stack__space { display: none; }
 @keyframes img-settle { from { transform: scale(1.2); } to { transform: none; } }
 @keyframes img-zoom   { from { transform: scale(1); }   to { transform: scale(1.12); } }
 @keyframes hero-fade  { from { opacity: 1; } to { opacity: 0; } }
+
+/* diagnostic: ?test=noclip — no overflow clipping on ancestors; cards clip inside their own pinned box */
+html.test-noclip, html.test-noclip body, html.test-noclip .works { overflow-x: visible; }
+html.test-noclip .stack__item, html.test-noclip .hero-sticky { overflow: hidden; }
