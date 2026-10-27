@@ -328,6 +328,7 @@ body.menu-open .site-header .brand { color: #000; }   /* wordmark reads on the w
 
 .card {
   position: relative; height: 100vh; height: calc(var(--vh, 1vh) * 100); overflow: hidden; background: #111;
+  box-shadow: 0 -24px 80px rgba(0,0,0,.65);   /* the incoming card reads as a panel sliding over the last one */
   transform-origin: top center; backface-visibility: hidden;
 }
 .card__link { position: absolute; inset: 0; display: block; }
@@ -506,3 +507,6 @@ body.menu-open .site-header .brand { color: #000; }   /* wordmark reads on the w
 /* diagnostic: ?test=flow — cards scroll normally, no stacking */
 html.test-flow .stack__item { position: static; }
 html.test-flow .stack__space { display: none; }
+
+/* faint edge so a dark card is visible as it tilts over an equally dark card */
+.card::after { content: ''; position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.16); pointer-events: none; z-index: 4; }
