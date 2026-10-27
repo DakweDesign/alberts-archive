@@ -83,6 +83,9 @@
   // Diagnostic switches (?test=static | flow | nozoom) — temporary, for isolating phone jitter
   const testMode = new URLSearchParams(location.search).get('test') || '';
   if (testMode) document.documentElement.classList.add('test-' + testMode);
+  // Phones: let the browser's scroll engine drive the card/hero animations (CSS scroll-driven animations)
+  const cssScroll = touchDevice && !testMode && CSS.supports && CSS.supports('animation-timeline: view()');
+  if (cssScroll) document.documentElement.classList.add('css-scroll');
   if (!reduceMotion && window.Lenis && !touchDevice) {
     lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
     const raf = (t) => { lenis.raf(t); render(lenis.scroll); requestAnimationFrame(raf); };
@@ -125,7 +128,7 @@
 
   // Fade the hero to 0 while the next section slides over it (0 → 100vh)
   addScrub({ start: 0, end: () => vh(), update: (p) => {
-    hero.style.opacity = (1 - p).toFixed(3);
+    if (!cssScroll) hero.style.opacity = (1 - p).toFixed(3);
     heroSticky.style.visibility = p >= 1 ? 'hidden' : 'visible';
   } });
 
@@ -155,6 +158,7 @@
     const img = item.querySelector('.card__img');
     const rot = parseFloat(item.dataset.rotate || '0');
 
+    if (cssScroll) { /* CSS scroll-driven animation handles the card and image on phones */ } else
     if (testMode === 'static' || testMode === 'flow') { card.style.transform = 'none'; } else
     addScrub({ start: () => itemTop(n) - vh(), end: () => itemTop(n), update: (p) => {
       const y = lerp(100, 0, p), r = lerp(rot, 0, p), s = lerp(0.75, 1, p);
@@ -165,6 +169,7 @@
     // Skipped on fitted (whole-photo) cards so the pen never grows out of frame.
     // card--fit-sm cards are fitted on phones only (whole photo in frame) and fill the frame on desktop
     const isFit = () => card.classList.contains('card--fit') || (card.classList.contains('card--fit-sm') && vw() <= 959);
+    if (cssScroll) {} else
     if (testMode) { img.style.transform = 'none'; } else
     addScrub({ start: () => itemTop(n) - vh(), end: () => itemTop(n) + vh(), update: (p) => {
       if (isFit()) {
@@ -246,19 +251,8 @@
     } });
   });
 
-  /* ------------------------------------------------------------------
-     10. Header skin — flips when the section under the header changes
-     ------------------------------------------------------------------ */
-  const skinSections = [...document.querySelectorAll('section[data-skin], footer[data-skin]')];
-  let skinIO;
-  const setupSkin = () => {
-    skinIO?.disconnect();
-    skinIO = new IntersectionObserver((entries) => {
-      entries.forEach((e) => { if (e.isIntersecting) document.body.dataset.skin = e.target.dataset.skin; });
-    }, { rootMargin: `0px 0px -${Math.max(vh() - 89, 0)}px 0px`, threshold: 0 });
-    skinSections.forEach((s) => skinIO.observe(s));
-  };
-  setupSkin();
+  // (header skin switching removed — the header is always white, and the observer forced a full style
+  //  recalculation at the exact moment each card locked to the top of the screen, which stuttered on iPhone)
 
   /* ------------------------------------------------------------------
      11. Custom cursor
@@ -441,7 +435,7 @@
     rt = setTimeout(() => {
       // phones: ignore the height-only changes caused by the browser toolbar; only a width change (rotation) re-lays out
       if (window.innerWidth === vhW && Math.abs(window.innerHeight - vhPx) < 160 && window.innerWidth <= 959) { refresh(); return; }
-      setVh(); setupMarquees(); setupSkin(); refresh();
+      setVh(); setupMarquees(); refresh();
     }, 150);
   });
   window.addEventListener('load', () => { setupMarquees(); refresh(); });

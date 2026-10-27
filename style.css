@@ -510,3 +510,32 @@ html.test-flow .stack__space { display: none; }
 
 /* faint edge so a dark card is visible as it tilts over an equally dark card */
 .card::after { content: ''; position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.16); pointer-events: none; z-index: 4; }
+
+/* ---------------------------------------------------------------------
+   PHONES: scroll-driven animations run on the browser's own scroll engine
+   (JavaScript scroll handlers lag the compositor on iOS and judder). Same
+   motion as the JS version: card arrives from below, tilted and scaled.
+   --------------------------------------------------------------------- */
+@supports (animation-timeline: view()) {
+  @media (pointer: coarse) {
+    html.css-scroll .stack__item { --rot: -30deg; }
+    html.css-scroll .stack__item[data-rotate="30"] { --rot: 30deg; }
+    html.css-scroll .card {
+      animation: card-in linear both; animation-timeline: view(); animation-range: entry 0% entry 100%;
+    }
+    html.css-scroll .card--fit .card__img, html.css-scroll .card--fit-sm .card__img {
+      animation: img-settle linear both; animation-timeline: view(); animation-range: entry 0% entry 100%;
+    }
+    html.css-scroll .card:not(.card--fit):not(.card--fit-sm) .card__img {
+      animation: img-zoom linear both; animation-timeline: view(); animation-range: entry 0% entry 100%;
+    }
+    html.css-scroll .hero { animation: hero-fade linear both; animation-timeline: scroll(root); animation-range: 0 calc(var(--vh, 1vh) * 100); }
+  }
+}
+@keyframes card-in {
+  from { transform: perspective(100vw) translate3d(0, calc(var(--vh, 1vh) * 100), 0) rotate(var(--rot, 0deg)) scale(.75); }
+  to   { transform: perspective(100vw) translate3d(0, 0, 0) rotate(0deg) scale(1); }
+}
+@keyframes img-settle { from { transform: scale(1.2); } to { transform: scale(1); } }
+@keyframes img-zoom   { from { transform: scale(1); }   to { transform: scale(1.12); } }
+@keyframes hero-fade  { from { opacity: 1; } to { opacity: 0; } }
