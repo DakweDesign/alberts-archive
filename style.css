@@ -502,3 +502,7 @@ body.menu-open .site-header .brand { color: #000; }   /* wordmark reads on the w
   .hero__intro { grid-column: 1 / -1; }
   .post { width: 80vw; }
 }
+
+/* diagnostic: ?test=flow — cards scroll normally, no stacking */
+html.test-flow .stack__item { position: static; }
+html.test-flow .stack__space { display: none; }

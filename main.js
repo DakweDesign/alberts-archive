@@ -80,6 +80,9 @@
      1. Smooth scroll (Lenis)
      ------------------------------------------------------------------ */
   const touchDevice = window.matchMedia('(pointer: coarse)').matches;
+  // Diagnostic switches (?test=static | flow | nozoom) — temporary, for isolating phone jitter
+  const testMode = new URLSearchParams(location.search).get('test') || '';
+  if (testMode) document.documentElement.classList.add('test-' + testMode);
   if (!reduceMotion && window.Lenis && !touchDevice) {
     lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
     const raf = (t) => { lenis.raf(t); render(lenis.scroll); requestAnimationFrame(raf); };
@@ -152,6 +155,7 @@
     const img = item.querySelector('.card__img');
     const rot = parseFloat(item.dataset.rotate || '0');
 
+    if (testMode === 'static' || testMode === 'flow') { card.style.transform = 'none'; } else
     addScrub({ start: () => itemTop(n) - vh(), end: () => itemTop(n), update: (p) => {
       const y = lerp(100, 0, p), r = lerp(rot, 0, p), s = lerp(0.75, 1, p);
       card.style.transform = `perspective(100vw) translate3d(0, ${y.toFixed(3)}vh, 0) rotate(${r.toFixed(3)}deg) scale(${s.toFixed(4)})`;
@@ -161,6 +165,7 @@
     // Skipped on fitted (whole-photo) cards so the pen never grows out of frame.
     // card--fit-sm cards are fitted on phones only (whole photo in frame) and fill the frame on desktop
     const isFit = () => card.classList.contains('card--fit') || (card.classList.contains('card--fit-sm') && vw() <= 959);
+    if (testMode) { img.style.transform = 'none'; } else
     addScrub({ start: () => itemTop(n) - vh(), end: () => itemTop(n) + vh(), update: (p) => {
       if (isFit()) {
         // fitted cards: arrive zoomed in and settle to the whole photo once the card is in place
