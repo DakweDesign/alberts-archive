@@ -162,7 +162,8 @@
     if (testMode === 'static' || testMode === 'flow') { card.style.transform = 'none'; } else
     addScrub({ start: () => itemTop(n) - vh(), end: () => itemTop(n), update: (p) => {
       const y = lerp(100, 0, p), r = lerp(rot, 0, p), s = lerp(0.75, 1, p);
-      card.style.transform = `perspective(100vw) translate3d(0, ${y.toFixed(3)}vh, 0) rotate(${r.toFixed(3)}deg) scale(${s.toFixed(4)})`;
+      // once landed, drop the transform entirely — a resting 3D transform under position:sticky shimmers on iOS
+      card.style.transform = p >= 1 ? '' : `perspective(100vw) translate3d(0, ${y.toFixed(3)}vh, 0) rotate(${r.toFixed(3)}deg) scale(${s.toFixed(4)})`;
     } });
 
     // "mask-scroll-zoom": image scales 1 → 1.2 as the card travels through the viewport.
@@ -174,7 +175,7 @@
     addScrub({ start: () => itemTop(n) - vh(), end: () => itemTop(n) + vh(), update: (p) => {
       if (isFit()) {
         // fitted cards: arrive zoomed in and settle to the whole photo once the card is in place
-        img.style.transform = `scale(${lerp(1.2, 1, Math.min(1, p * 2)).toFixed(4)})`;
+        img.style.transform = p >= 0.5 ? '' : `scale(${lerp(1.2, 1, Math.min(1, p * 2)).toFixed(4)})`;
       } else {
         img.style.transform = `scale(${lerp(1, 1.2, p).toFixed(4)})`;
       }
