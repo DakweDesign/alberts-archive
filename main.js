@@ -84,7 +84,7 @@
   const testMode = new URLSearchParams(location.search).get('test') || '';
   if (testMode) document.documentElement.classList.add('test-' + testMode);
   // Phones: let the browser's scroll engine drive the card/hero animations (CSS scroll-driven animations)
-  const cssScroll = touchDevice && !testMode && CSS.supports && CSS.supports('animation-timeline: view()');
+  const cssScroll = touchDevice && (!testMode || testMode === 'noclip') && CSS.supports && CSS.supports('animation-timeline: view()');
   if (cssScroll) document.documentElement.classList.add('css-scroll');
   if (!reduceMotion && window.Lenis && !touchDevice) {
     lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
@@ -422,9 +422,57 @@
     };
     const close = () => { gal.classList.remove('is-open'); setTimeout(() => { gal.hidden = true; }, 400); };
     btn.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); open(); });
+    // the whole card (the pen photo) opens the gallery too
+    const link = btn.closest('.card__link');
+    if (link) {
+      link.dataset.gallery = btn.dataset.gallery;
+      link.addEventListener('click', (e) => { if (gal.hidden) { e.preventDefault(); open(); } });
+    }
     gal.querySelector('.card__gallery-close').addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); close(); });
-    gal.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); if (e.target === gal) close(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !gal.hidden) close(); });
+    gal.addEventListener('click', (e) => {
+      e.preventDefault(); e.stopPropagation();
+      const fig = e.target.closest('.card__thumb');
+      if (fig) { openLightbox([...gal.querySelectorAll('.card__thumb img')], fig.querySelector('img')); return; }
+      if (e.target === gal) close();
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !gal.hidden && lightbox.hidden) close(); });
+  });
+
+  /* ------------------------------------------------------------------
+     12c. Lightbox — a tapped thumbnail opens large, with prev/next
+     ------------------------------------------------------------------ */
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = lightbox.querySelector('.lightbox__img');
+  const lbPrev = lightbox.querySelector('.lightbox__nav--prev');
+  const lbNext = lightbox.querySelector('.lightbox__nav--next');
+  let lbSet = [], lbIdx = 0;
+  const showLb = (i) => {
+    lbIdx = i; const im = lbSet[i];
+    lbImg.src = im.currentSrc || im.src; lbImg.alt = im.alt || '';
+    lbPrev.disabled = i === 0; lbNext.disabled = i === lbSet.length - 1;
+  };
+  function openLightbox(set, img) {
+    lbSet = set; showLb(Math.max(0, set.indexOf(img)));
+    lightbox.hidden = false; requestAnimationFrame(() => lightbox.classList.add('is-open'));
+    if (lenis) lenis.stop();
+  }
+  const closeLightbox = () => { lightbox.classList.remove('is-open'); setTimeout(() => { lightbox.hidden = true; lbImg.src = ''; }, 300); if (lenis) lenis.start(); };
+  lightbox.querySelector('.lightbox__close').addEventListener('click', closeLightbox);
+  lbPrev.addEventListener('click', (e) => { e.stopPropagation(); if (lbIdx > 0) showLb(lbIdx - 1); });
+  lbNext.addEventListener('click', (e) => { e.stopPropagation(); if (lbIdx < lbSet.length - 1) showLb(lbIdx + 1); });
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox || e.target === lbImg) closeLightbox(); });
+  document.addEventListener('keydown', (e) => {
+    if (lightbox.hidden) return;
+    if (e.key === 'Escape') closeLightbox();
+    else if (e.key === 'ArrowLeft' && lbIdx > 0) showLb(lbIdx - 1);
+    else if (e.key === 'ArrowRight' && lbIdx < lbSet.length - 1) showLb(lbIdx + 1);
+  });
+  // swipe between photos on touch
+  let lbTouchX = null;
+  lightbox.addEventListener('touchstart', (e) => { lbTouchX = e.touches[0].clientX; }, { passive: true });
+  lightbox.addEventListener('touchend', (e) => {
+    if (lbTouchX === null) return; const dx = e.changedTouches[0].clientX - lbTouchX; lbTouchX = null;
+    if (dx < -40 && lbIdx < lbSet.length - 1) showLb(lbIdx + 1); else if (dx > 40 && lbIdx > 0) showLb(lbIdx - 1);
   });
 
   /* ------------------------------------------------------------------
