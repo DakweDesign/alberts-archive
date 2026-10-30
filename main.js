@@ -102,6 +102,7 @@
     const stagger = parseInt(el.dataset.stagger || '20', 10);
     const speed = parseInt(el.dataset.speed || '1000', 10);
     const words = el.textContent.trim().split(/\s+/);
+    const breakAfter = new Set((el.dataset.breakAfter || '').split(',').filter(Boolean).map(Number));   // word indexes followed by a line break
     el.textContent = '';
     let i = 0;
     words.forEach((word, wi) => {
@@ -117,10 +118,13 @@
         i++;
       });
       el.appendChild(w);
-      if (wi < words.length - 1) el.appendChild(document.createTextNode(' '));
+      if (wi < words.length - 1) el.appendChild(breakAfter.has(wi) ? document.createElement('br') : document.createTextNode(' '));
     });
   });
 
+  // hero photo: phone-size file on narrow screens (set here so the path resolves against the page, not the stylesheet)
+  const heroBgImg = document.querySelector('.hero__bg-img');
+  if (heroBgImg) heroBgImg.style.backgroundImage = `url('${window.innerWidth <= 959 ? heroBgImg.dataset.srcSm : heroBgImg.dataset.src}')`;
   const heroSticky = document.querySelector('.hero-sticky');
   const hero = document.getElementById('hero');
   const startHero = () => hero.querySelectorAll('.anim-col, .t-split').forEach((el) => el.classList.add('start_animation'));

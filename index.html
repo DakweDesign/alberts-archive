@@ -13,7 +13,7 @@
 
   <!-- ===================== HEADER ===================== -->
   <header class="site-header" id="siteHeader">
-    <a href="#" class="brand">Albert’s<br>Archive</a>
+    <a href="#" class="brand">Pen.Ultimate.Inks<br>Archive</a>
     <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
       <span class="lines"></span>
     </button>
@@ -22,7 +22,7 @@
   <!-- ===================== OVERLAY MENU ===================== -->
   <nav class="overlay-menu" id="overlayMenu" aria-hidden="true">
     <ul class="overlay-menu__list">
-      <li><a href="#works">Collection</a></li>
+      <li><a href="#collection">Collection</a></li>
       <li><a href="https://www.instagram.com/pen.ultimate.inks/" target="_blank" rel="noopener">Instagram</a></li>
       <li><a href="#" data-pending-url="Benson Pen Co.">Benson Pen Co.</a></li>
       <li><a href="#penSearch" id="menuSearch">Search</a></li>
@@ -49,7 +49,7 @@
     <div class="hero-sticky">
       <section class="hero accent-bg" id="hero" data-skin="dark">
         <div class="hero__bg">
-          <div class="hero__bg-img" style="--hero-lg:url('hero.jpg');--hero-sm:url('hero-m.jpg')"></div>
+          <div class="hero__bg-img" data-src="hero.jpg" data-src-sm="hero-m.jpg"></div>
           <div class="hero__bg-overlay"></div>
         </div>
 
@@ -58,7 +58,7 @@
           </div>
 
           <div class="hero__bottom">
-            <h1 class="hero__title t-split" data-split="chars" data-speed="1000" data-stagger="20">Collection</h1>
+            <h1 class="hero__title t-split" data-split="chars" data-speed="1000" data-stagger="20" data-break-after="0">Digital Collection</h1>
             <div class="hero__scroll" aria-hidden="true">
               <span class="hero__scroll-label">scroll</span>
               <div class="hero__scroll-arrow"><i></i><i></i><i></i></div>
@@ -94,7 +94,7 @@
           </form>
         </div>
         <div class="t-body-lg philosophy__copy">
-          <p>This is a digital archive of Albert’s (<a href="https://www.instagram.com/pen.ultimate.inks/" target="_blank" rel="noopener">@pen.ultimate.inks</a>) fountain pen collection. This collection has been carefully curated over the last X years from a pure love of pens. The highlight of the collection is the Tohma Mozu 77 Kingfisher. If you are interested in any pens or have any questions, please feel free to leave a comment on the Instagram page. All pictures in this archive are originals, taken by Albert.</p>
+          <p>This is a digital archive of <a href="https://www.instagram.com/pen.ultimate.inks/" target="_blank" rel="noopener">@pen.ultimate.inks</a> fountain pen collection. This collection has been carefully curated over the last X years, from a pure love of pens. The highlight of the collection is the Tohma Mozu 77 Kingfisher. If you are interested in any pens or have any questions, please feel free to leave a comment on the Instagram page. All pictures in this archive are originals, taken by pen.ultimate.inks.</p>
           <p>Thank you for visiting the collection and enjoy scrolling!</p>
         </div>
       </div>
@@ -104,7 +104,196 @@
       </div>
     </section>
 
-    <!-- ===================== BRAND BAR ===================== -->
+    <!-- ===================== BRAND BAR — Bexley (brands in alphabetical order; first bar carries id="collection") ===================== -->
+    <div class="brand-bar brand-bar--wordmark brand-bar--wordmark-xl" id="collection" data-skin="dark">
+      <img class="brand-bar__logo" src="bexley-logo.png" alt="Bexley">
+      <span class="brand-bar__name">Bexley</span>
+    </div>
+
+    <!-- ===================== WORKS — Bexley stacked cards ===================== -->
+    <section class="works accent-bg" id="works-bexley" data-skin="dark">
+      <div class="stack" id="stackBexley">
+        <div class="stack__item" data-rotate="-30">
+          <article class="card card--fit" style="background:#06080f">
+            <a href="#" class="card__link">
+              <div class="card__media"><picture><source media="(max-width: 959px)" srcset="work-30-m.jpg"><img src="work-30.jpg" alt="" class="card__img" loading="lazy" decoding="async" data-scroll-val="5"></picture></div>
+              <div class="card__overlay"></div>
+              <h3 class="card__title card__title--bl t-h1-lg"><span class="card__title-txt">Bexley Giant</span></h3>
+              <img class="card__badge card__badge--xwide" src="bexley-logo.png" alt="Bexley">
+            </a>
+          </article>
+        </div>
+        <div class="stack__space"></div>
+        <div class="stack__tail"></div>
+      </div>
+    </section>
+
+    <!-- ===================== BRAND BAR — Chahira Issai ===================== -->
+    <div class="brand-bar" id="brandBarChahira" data-skin="dark">
+      <img class="brand-bar__logo brand-bar__logo--wide" src="chahira-logo.png" alt="">
+      <span class="brand-bar__name">Chahira Issai</span>
+    </div>
+
+    <!-- ===================== WORKS — Chahira Issai stacked cards ===================== -->
+    <section class="works accent-bg" id="works-chahira" data-skin="dark">
+      <div class="stack" id="stackChahira">
+        <div class="stack__item" data-rotate="-30">
+          <article class="card card--fit" style="background:#05070f">
+            <a href="#" class="card__link">
+              <div class="card__media"><picture><source media="(max-width: 959px)" srcset="work-32-m.jpg"><img src="work-32.jpg" alt="" class="card__img" loading="lazy" decoding="async" data-scroll-val="5"></picture></div>
+              <div class="card__overlay"></div>
+              <h3 class="card__title card__title--bl t-h1-lg"><button type="button" class="card__title-btn" data-gallery="gallery-chahira-kingfisher" aria-haspopup="dialog">Chahira&nbsp;Issai Kingfisher Makie</button></h3>
+              <img class="card__badge card__badge--wide" src="chahira-logo.png" alt="Chahira Issai">
+              <div class="card__gallery" id="gallery-chahira-kingfisher" role="dialog" aria-label="Chahira Issai Kingfisher Makie gallery" hidden>
+                <button type="button" class="card__gallery-close" aria-label="Close gallery"><span class="lines"></span></button>
+                <div class="card__gallery-grid card__gallery-grid--4">
+                  <figure class="card__thumb"><img data-src="gcha-1.jpg" alt="Chahira Issai Kingfisher Makie, kingfisher detail" loading="lazy"></figure>
+                  <figure class="card__thumb"><img data-src="gcha-2.jpg" alt="Chahira Issai Kingfisher Makie, cap" loading="lazy"></figure>
+                  <figure class="card__thumb"><img data-src="gcha-3.jpg" alt="Chahira Issai Kingfisher Makie, maple leaves" loading="lazy"></figure>
+                  <figure class="card__thumb"><img data-src="gcha-4.jpg" alt="Chahira Issai Kingfisher Makie, whole pen" loading="lazy"></figure>
+                </div>
+              </div>
+            </a>
+          </article>
+        </div>
+        <div class="stack__space"></div>
+        <div class="stack__item" data-rotate="30">
+          <article class="card card--fit" style="background:#05070f">
+            <a href="#" class="card__link">
+              <div class="card__media"><picture><source media="(max-width: 959px)" srcset="work-33-m.jpg"><img src="work-33.jpg" alt="" class="card__img" loading="lazy" decoding="async" data-scroll-val="5"></picture></div>
+              <div class="card__overlay"></div>
+              <h3 class="card__title card__title--bl t-h1-lg"><button type="button" class="card__title-btn" data-gallery="gallery-chahira-rabbit" aria-haspopup="dialog">Chahira&nbsp;Issai Rabbit&nbsp;&amp;&nbsp;Dragonfly</button></h3>
+              <img class="card__badge card__badge--wide" src="chahira-logo.png" alt="Chahira Issai">
+              <div class="card__gallery" id="gallery-chahira-rabbit" role="dialog" aria-label="Chahira Issai Rabbit &amp; Dragonfly gallery" hidden>
+                <button type="button" class="card__gallery-close" aria-label="Close gallery"><span class="lines"></span></button>
+                <div class="card__gallery-grid">
+                  <figure class="card__thumb"><img data-src="gcha-5.jpg" alt="Chahira Issai Rabbit &amp; Dragonfly, cap and clip" loading="lazy"></figure>
+                  <figure class="card__thumb"><img data-src="gcha-6.jpg" alt="Chahira Issai Rabbit &amp; Dragonfly, rabbit and moon" loading="lazy"></figure>
+                  <figure class="card__thumb"><img data-src="gcha-7.jpg" alt="Chahira Issai Rabbit &amp; Dragonfly, whole pen from above" loading="lazy"></figure>
+                  <figure class="card__thumb"><img data-src="gcha-8.jpg" alt="Chahira Issai Rabbit &amp; Dragonfly, dragonflies on the barrel" loading="lazy"></figure>
+                  <figure class="card__thumb"><img data-src="gcha-9.jpg" alt="Chahira Issai Rabbit &amp; Dragonfly, nib" loading="lazy"></figure>
+                </div>
+              </div>
+            </a>
+          </article>
+        </div>
+        <div class="stack__space"></div>
+        <div class="stack__item" data-rotate="-30">
+          <article class="card card--fit" style="background:#05070f">
+            <a href="#" class="card__link">
+              <div class="card__media"><picture><source media="(max-width: 959px)" srcset="work-34-m.jpg"><img src="work-34.jpg" alt="" class="card__img" loading="lazy" decoding="async" data-scroll-val="5"></picture></div>
+              <div class="card__overlay"></div>
+              <h3 class="card__title card__title--bl t-h1-lg"><button type="button" class="card__title-btn" data-gallery="gallery-chahira-rankaku" aria-haspopup="dialog">Chahira&nbsp;Issai Rankaku</button></h3>
+              <img class="card__badge card__badge--wide" src="chahira-logo.png" alt="Chahira Issai">
+              <div class="card__gallery" id="gallery-chahira-rankaku" role="dialog" aria-label="Chahira Issai Rankaku gallery" hidden>
+                <button type="button" class="card__gallery-close" aria-label="Close gallery"><span class="lines"></span></button>
+                <div class="card__gallery-grid card__gallery-grid--3">
+                  <figure class="card__thumb"><img data-src="gcha-10.jpg" alt="Chahira Issai Rankaku, on the stand" loading="lazy"></figure>
+                  <figure class="card__thumb"><img data-src="gcha-11.jpg" alt="Chahira Issai Rankaku, eggshell detail" loading="lazy"></figure>
+                  <figure class="card__thumb"><img data-src="gcha-12.jpg" alt="Chahira Issai Rankaku, artist signature" loading="lazy"></figure>
+                </div>
+              </div>
+            </a>
+          </article>
+        </div>
+        <div class="stack__space"></div>
+        <div class="stack__tail"></div>
+      </div>
+    </section>
+
+    <!-- ===================== BRAND BAR — Danitrio ===================== -->
+    <div class="brand-bar" id="brandBarDanitrio" data-skin="dark">
+      <img class="brand-bar__logo brand-bar__logo--wide" src="danitrio-logo.png" alt="">
+      <span class="brand-bar__name">Danitrio</span>
+    </div>
+
+    <!-- ===================== WORKS — Danitrio stacked cards ===================== -->
+    <section class="works accent-bg" id="works-danitrio" data-skin="dark">
+      <div class="stack" id="stackDanitrio">
+        <div class="stack__item" data-rotate="-30">
+          <article class="card card--fit" style="background:#05070f">
+            <a href="#" class="card__link">
+              <div class="card__media"><picture><source media="(max-width: 959px)" srcset="work-35-m.jpg"><img src="work-35.jpg" alt="" class="card__img" loading="lazy" decoding="async" data-scroll-val="5"></picture></div>
+              <div class="card__overlay"></div>
+              <h3 class="card__title card__title--bl t-h1-lg"><button type="button" class="card__title-btn" data-gallery="gallery-danitrio-yokozuna" aria-haspopup="dialog">Danitrio Yokozuna</button></h3>
+              <img class="card__badge card__badge--wide" src="danitrio-logo.png" alt="Danitrio">
+              <div class="card__gallery" id="gallery-danitrio-yokozuna" role="dialog" aria-label="Danitrio Yokozuna gallery" hidden>
+                <button type="button" class="card__gallery-close" aria-label="Close gallery"><span class="lines"></span></button>
+                <div class="card__gallery-grid card__gallery-grid--2">
+                  <figure class="card__thumb"><img data-src="gdan-1.jpg" alt="Danitrio Yokozuna pair on the stand" loading="lazy"></figure>
+                  <figure class="card__thumb"><img data-src="gdan-2.jpg" alt="Danitrio Yokozuna, artist signatures" loading="lazy"></figure>
+                </div>
+              </div>
+            </a>
+          </article>
+        </div>
+        <div class="stack__space"></div>
+        <div class="stack__tail"></div>
+      </div>
+    </section>
+
+    <!-- ===================== BRAND BAR — Elbwood ===================== -->
+    <div class="brand-bar" id="brandBarElbwood" data-skin="dark">
+      <img class="brand-bar__logo" src="elbwood-logo.png" alt="">
+      <span class="brand-bar__name">Elbwood</span>
+    </div>
+
+    <!-- ===================== WORKS — Elbwood stacked cards ===================== -->
+    <section class="works accent-bg" id="works-elbwood" data-skin="dark">
+      <div class="stack" id="stackElbwood">
+        <div class="stack__item" data-rotate="-30">
+          <article class="card card--fit" style="background:#000">
+            <a href="#" class="card__link">
+              <div class="card__media"><picture><source media="(max-width: 959px)" srcset="work-28-m.jpg"><img src="work-28.jpg" alt="" class="card__img" loading="lazy" decoding="async" data-scroll-val="5"></picture></div>
+              <div class="card__overlay"></div>
+              <h3 class="card__title card__title--bl t-h1-lg"><button type="button" class="card__title-btn" data-gallery="gallery-pocketmaster" aria-haspopup="dialog">Elbwood Pocketmaster</button></h3>
+              <img class="card__badge" src="elbwood-logo.png" alt="Elbwood">
+              <div class="card__gallery" id="gallery-pocketmaster" role="dialog" aria-label="Elbwood Pocketmaster gallery" hidden>
+                <button type="button" class="card__gallery-close" aria-label="Close gallery"><span class="lines"></span></button>
+                <div class="card__gallery-grid card__gallery-grid--1">
+                  <figure class="card__thumb"><img data-src="gelb-1.jpg" alt="Elbwood Pocketmaster trio, nibs" loading="lazy"></figure>
+                </div>
+              </div>
+            </a>
+          </article>
+        </div>
+        <div class="stack__space"></div>
+        <div class="stack__tail"></div>
+      </div>
+    </section>
+
+    <!-- ===================== BRAND BAR — Leonardo ===================== -->
+    <div class="brand-bar" id="brandBarLeonardo" data-skin="dark">
+      <img class="brand-bar__logo brand-bar__logo--wide" src="leonardo-logo.png" alt="">
+      <span class="brand-bar__name">Leonardo</span>
+    </div>
+
+    <!-- ===================== WORKS — Leonardo stacked cards ===================== -->
+    <section class="works accent-bg" id="works-leonardo" data-skin="dark">
+      <div class="stack" id="stackLeonardo">
+        <div class="stack__item" data-rotate="-30">
+          <article class="card card--fit" style="background:#06100d">
+            <a href="#" class="card__link">
+              <div class="card__media"><picture><source media="(max-width: 959px)" srcset="work-36-m.jpg"><img src="work-36.jpg" alt="" class="card__img" loading="lazy" decoding="async" data-scroll-val="5"></picture></div>
+              <div class="card__overlay"></div>
+              <h3 class="card__title card__title--bl t-h1-lg"><button type="button" class="card__title-btn" data-gallery="gallery-leonardo-cigar" aria-haspopup="dialog">Leonardo LeonArco Cigar</button></h3>
+              <img class="card__badge card__badge--wide" src="leonardo-logo.png" alt="Leonardo">
+              <div class="card__gallery" id="gallery-leonardo-cigar" role="dialog" aria-label="Leonardo LeonArco Cigar gallery" hidden>
+                <button type="button" class="card__gallery-close" aria-label="Close gallery"><span class="lines"></span></button>
+                <div class="card__gallery-grid card__gallery-grid--2">
+                  <figure class="card__thumb"><img data-src="gleo-1.jpg" alt="Leonardo LeonArco Cigar pair, capped" loading="lazy"></figure>
+                  <figure class="card__thumb"><img data-src="gleo-2.jpg" alt="Leonardo LeonArco Cigar pair, uncapped" loading="lazy"></figure>
+                </div>
+              </div>
+            </a>
+          </article>
+        </div>
+        <div class="stack__space"></div>
+        <div class="stack__tail"></div>
+      </div>
+    </section>
+
+    <!-- ===================== BRAND BAR — Montblanc ===================== -->
     <div class="brand-bar" id="brandBar" data-skin="dark">
       <img class="brand-bar__logo" src="montblanc-star.png" alt="">
       <span class="brand-bar__name">Montblanc</span>
@@ -113,6 +302,26 @@
     <!-- ===================== WORKS — stacked cards ===================== -->
     <section class="works accent-bg" id="works" data-skin="dark">
       <div class="stack" id="stack">
+
+        <div class="stack__item" data-rotate="-30">
+          <article class="card card--fit" style="background:#000">
+            <a href="#" class="card__link">
+              <div class="card__media"><picture><source media="(max-width: 959px)" srcset="work-38-m.jpg"><img src="work-38.jpg" alt="" class="card__img" loading="lazy" decoding="async" data-scroll-val="5"></picture></div>
+              <div class="card__overlay"></div>
+              <h3 class="card__title card__title--bl t-h1-lg"><button type="button" class="card__title-btn" data-gallery="gallery-80days" aria-haspopup="dialog">Montblanc 80&nbsp;Days</button></h3>
+              <img class="card__badge" src="montblanc-star.png" alt="Montblanc">
+              <div class="card__gallery" id="gallery-80days" role="dialog" aria-label="Montblanc 80 Days gallery" hidden>
+                <button type="button" class="card__gallery-close" aria-label="Close gallery"><span class="lines"></span></button>
+                <div class="card__gallery-grid card__gallery-grid--3">
+                  <figure class="card__thumb"><img data-src="g80-1.jpg" alt="Montblanc 80 Days trio in the tray" loading="lazy"></figure>
+                  <figure class="card__thumb"><img data-src="g80-2.jpg" alt="Montblanc 80 Days, engraved cap plates" loading="lazy"></figure>
+                  <figure class="card__thumb"><img data-src="g80-3.jpg" alt="Montblanc 80 Days, balloon nibs" loading="lazy"></figure>
+                </div>
+              </div>
+            </a>
+          </article>
+        </div>
+        <div class="stack__space"></div>
 
         <div class="stack__item" data-rotate="-30">
           <article class="card card--fit" style="background:#000">
@@ -130,6 +339,25 @@
                 </div>
               </div>
               <img class="card__badge" src="montblanc-star.png" alt="Montblanc">
+            </a>
+          </article>
+        </div>
+        <div class="stack__space"></div>
+
+        <div class="stack__item" data-rotate="30">
+          <article class="card card--fit" style="background:#000">
+            <a href="#" class="card__link">
+              <div class="card__media"><picture><source media="(max-width: 959px)" srcset="work-37-m.jpg"><img src="work-37.jpg" alt="" class="card__img" loading="lazy" decoding="async" data-scroll-val="5"></picture></div>
+              <div class="card__overlay"></div>
+              <h3 class="card__title card__title--bl t-h1-lg"><button type="button" class="card__title-btn" data-gallery="gallery-1912" aria-haspopup="dialog">Montblanc 1912&nbsp;&amp;&nbsp;1914</button></h3>
+              <img class="card__badge" src="montblanc-star.png" alt="Montblanc">
+              <div class="card__gallery" id="gallery-1912" role="dialog" aria-label="Montblanc 1912 &amp; 1914 gallery" hidden>
+                <button type="button" class="card__gallery-close" aria-label="Close gallery"><span class="lines"></span></button>
+                <div class="card__gallery-grid card__gallery-grid--2">
+                  <figure class="card__thumb"><img data-src="g1912-1.jpg" alt="Montblanc 1912 &amp; 1914 on the bamboo board" loading="lazy"></figure>
+                  <figure class="card__thumb"><img data-src="g1912-2.jpg" alt="Montblanc 1912 &amp; 1914, mother-of-pearl stars" loading="lazy"></figure>
+                </div>
+              </div>
             </a>
           </article>
         </div>
@@ -522,6 +750,65 @@
       </div>
     </section>
 
+    <!-- ===================== BRAND BAR — Oldwin ===================== -->
+    <div class="brand-bar brand-bar--wordmark" id="brandBarOldwin" data-skin="dark">
+      <img class="brand-bar__logo" src="oldwin-logo.png" alt="Oldwin Paris">
+      <span class="brand-bar__name">Oldwin</span>
+    </div>
+
+    <!-- ===================== WORKS — Oldwin stacked cards ===================== -->
+    <section class="works accent-bg" id="works-oldwin" data-skin="dark">
+      <div class="stack" id="stackOldwin">
+        <div class="stack__item" data-rotate="-30">
+          <article class="card card--fit" style="background:#000">
+            <a href="#" class="card__link">
+              <div class="card__media"><picture><source media="(max-width: 959px)" srcset="work-29-m.jpg"><img src="work-29.jpg" alt="" class="card__img" loading="lazy" decoding="async" data-scroll-val="5"></picture></div>
+              <div class="card__overlay"></div>
+              <h3 class="card__title card__title--bl t-h1-lg"><button type="button" class="card__title-btn" data-gallery="gallery-oldwin-classic" aria-haspopup="dialog">Oldwin Classic</button></h3>
+              <img class="card__badge card__badge--wide" src="oldwin-logo.png" alt="Oldwin">
+              <div class="card__gallery" id="gallery-oldwin-classic" role="dialog" aria-label="Oldwin Classic gallery" hidden>
+                <button type="button" class="card__gallery-close" aria-label="Close gallery"><span class="lines"></span></button>
+                <div class="card__gallery-grid card__gallery-grid--1">
+                  <figure class="card__thumb"><img data-src="gold-1.jpg" alt="Oldwin Classic, four pens on the tray" loading="lazy"></figure>
+                </div>
+              </div>
+            </a>
+          </article>
+        </div>
+        <div class="stack__space"></div>
+        <div class="stack__tail"></div>
+      </div>
+    </section>
+
+    <!-- ===================== BRAND BAR — Ong Dinh Bao Tri ===================== -->
+    <div class="brand-bar" id="brandBarOngDinhBaoTri" data-skin="dark">
+      <span class="brand-bar__name">Ong Dinh Bao Tri</span>
+    </div>
+
+    <!-- ===================== WORKS — Ong Dinh Bao Tri stacked cards ===================== -->
+    <section class="works accent-bg" id="works-ong-dinh-bao-tri" data-skin="dark">
+      <div class="stack" id="stackOngDinhBaoTri">
+        <div class="stack__item" data-rotate="-30">
+          <article class="card card--fit" style="background:#000">
+            <a href="#" class="card__link">
+              <div class="card__media"><picture><source media="(max-width: 959px)" srcset="work-31-m.jpg"><img src="work-31.jpg" alt="" class="card__img" loading="lazy" decoding="async" data-scroll-val="5"></picture></div>
+              <div class="card__overlay"></div>
+              <h3 class="card__title card__title--bl t-h1-lg"><button type="button" class="card__title-btn" data-gallery="gallery-odbt-artwork" aria-haspopup="dialog">Ong&nbsp;Dinh&nbsp;Bao&nbsp;Tri Artwork</button></h3>
+              <span class="card__badge card__badge--text" aria-hidden="true">Ong Dinh Bao&nbsp;Tri</span>
+              <div class="card__gallery" id="gallery-odbt-artwork" role="dialog" aria-label="Ong Dinh Bao Tri Artwork gallery" hidden>
+                <button type="button" class="card__gallery-close" aria-label="Close gallery"><span class="lines"></span></button>
+                <div class="card__gallery-grid card__gallery-grid--1">
+                  <figure class="card__thumb"><img data-src="gong-1.jpg" alt="Ong Dinh Bao Tri Artwork, five pens on the tray" loading="lazy"></figure>
+                </div>
+              </div>
+            </a>
+          </article>
+        </div>
+        <div class="stack__space"></div>
+        <div class="stack__tail"></div>
+      </div>
+    </section>
+
     <!-- ===================== BRAND BAR — Tohma ===================== -->
     <div class="brand-bar" id="brandBarTohma" data-skin="dark">
       <img class="brand-bar__logo" src="tohma-logo.png" alt="">
@@ -661,7 +948,7 @@
           <div class="footer__cell footer__cell--empty"></div>
           <div class="footer__cell footer__cell--right">
             <ul class="footer__menu">
-              <li><a href="#works">Collection</a></li>
+              <li><a href="#collection">Collection</a></li>
               <li><a href="https://www.instagram.com/pen.ultimate.inks/" target="_blank" rel="noopener">Instagram</a></li>
               <li><a href="#" data-pending-url="Benson Pen Co.">Benson&nbsp;Pen&nbsp;Co.</a></li>
               <li><a href="#penSearch" class="footer__search">Search</a></li>
