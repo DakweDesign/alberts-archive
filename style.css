@@ -404,7 +404,7 @@ body.menu-open .site-header .brand { color: #000; }   /* wordmark reads on the w
 
 .card__badge { position: absolute; right: var(--s2); bottom: var(--s2); width: clamp(40px, 5vw, 90px); height: auto; z-index: 3; }
 .card__badge--wide { width: clamp(80px, 10vw, 180px); }   /* wide badges (Oldwin wordmark, Chahira Issai characters) */
-.card__badge--xwide { width: clamp(120px, 15vw, 270px); }   /* Bexley */
+.card__badge--xwide { width: clamp(120px, 15vw, 270px); transform: translateY(28%); }   /* Bexley — the swash hangs below the letters, so drop the mark to line the letters up with the other badges */
 /* text badge — brands whose "logo" is their name (Ong Dinh Bao Tri) */
 .card__badge--text { width: auto; max-width: 34vw; text-align: right; color: var(--white); font-size: clamp(14px, 1.6vw, 26px); line-height: 1.15; letter-spacing: .02em; font-weight: 300; }
 .card__title {
@@ -413,6 +413,13 @@ body.menu-open .site-header .brand { color: #000; }   /* wordmark reads on the w
 }
 .card__title.card__title--bl { place-items: end start; text-align: left; padding: var(--s2); }
 @media (max-width: 959px) { .card__title.card__title--bl { font-size: clamp(36px, 10.5vw, 64px); padding-right: calc(var(--s2) + 52px); } }   /* keep names clear of the badge on phones */
+/* phones: badges keep their size; the title reserves room for whichever badge the card carries (and shrinks via fitTitles if a word still won't fit) */
+@media (max-width: 959px) {
+  .card--badge-wide  .card__title--bl { padding-right: calc(var(--s2) + 92px); }    /* 80px badge + gap */
+  .card__badge--xwide { width: 84px; }                                                /* Bexley: smaller on phones */
+  .card--badge-xwide .card__title--bl { padding-right: calc(var(--s2) + 96px); }    /* 84px badge + gap */
+  .card--badge-text  .card__title--bl { padding-right: calc(var(--s2) + 34vw + 12px); }
+}
 
 /* ---------------------------------------------------------------------
    STATEMENT / APPROACH
